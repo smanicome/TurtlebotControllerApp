@@ -48,15 +48,15 @@ class _ControllerPageState extends State<ControllerPage> {
     setState(() {
       _imageStreamData.addAll(event);
       if (_sizeOfNextImage == 0) {
-        if (_imageStreamData.length > 2) {
+        if (_imageStreamData.length > 8) {
           _sizeOfNextImage = ByteData.sublistView(
             Uint8List.fromList(
-              _imageStreamData.sublist(0, 2),
+              _imageStreamData.sublist(0, 8),
             ),
             0,
-            2,
-          ).getInt16(0);
-          _imageStreamData.removeRange(0, 2);
+            8,
+          ).getInt64(0);
+          _imageStreamData.removeRange(0, 8);
         }
       }
       if (_sizeOfNextImage != 0) {

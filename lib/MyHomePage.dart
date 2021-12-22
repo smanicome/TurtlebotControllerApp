@@ -18,10 +18,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController firstController = TextEditingController(text: '192');
-  TextEditingController secondController = TextEditingController(text: '168');
-  TextEditingController thirdController = TextEditingController(text: '43');
-  TextEditingController fourthController = TextEditingController(text: '179');
+  TextEditingController firstController = TextEditingController(text: '147');
+  TextEditingController secondController = TextEditingController(text: '229');
+  TextEditingController thirdController = TextEditingController(text: '212');
+  TextEditingController fourthController = TextEditingController(text: '151');
 
   FocusNode firstNode = FocusNode();
   FocusNode secondNode = FocusNode();
