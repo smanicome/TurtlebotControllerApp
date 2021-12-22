@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:turtlebot_controller/ControllerPage.dart';
 
+/// The first page
+/// IP address input fields and connect button
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -18,11 +20,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // Controls the text field input
   TextEditingController firstController = TextEditingController(text: '147');
   TextEditingController secondController = TextEditingController(text: '229');
   TextEditingController thirdController = TextEditingController(text: '212');
   TextEditingController fourthController = TextEditingController(text: '151');
 
+  // Used to automatically focus to the next text field
   FocusNode firstNode = FocusNode();
   FocusNode secondNode = FocusNode();
   FocusNode thirdNode = FocusNode();
@@ -33,7 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  /// Connect to both servers and move to controller page when connected
   Future<void> connect() async {
+    // Join the different parts of the IP address into a single string
     var values = [
       firstController.text,
       secondController.text,
@@ -42,15 +48,19 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     var ipAddress = values.join('.');
 
+    // Show loading modal
     ProgressHUD.of(context)?.show();
 
+    // Connect to both servers
     var cameraStreamSocket =
         await Socket.connect(InternetAddress(ipAddress), 3698);
     var inputControlSocket =
         await Socket.connect(InternetAddress(ipAddress), 3699);
 
+    // Close loading modal
     ProgressHUD.of(context)?.dismiss();
 
+    // Navigate to controller page, with sockets as parameters
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
@@ -168,6 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            // Button to trigger connection attempt
             ElevatedButton(
               onPressed: connect,
               child: const Text('Connect'),
